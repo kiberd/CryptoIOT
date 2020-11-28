@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:fragment="configFragment">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>NONOS</title>
+
+<link href="/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/css/font-awesome.min.css" rel="stylesheet" />
+<link href="/css/nprogress.css" rel="stylesheet" />
+<link href="/css/green.css" rel="stylesheet" />
+<link href="/css/custom.min.css" rel="stylesheet" />
+
+<th:block layout:fragment="css" />
+</head>
+<body class="login">
+	<div>
+		<a class="hiddenanchor" id="signup"></a> <a class="hiddenanchor" id="signin"></a>
+
+		<div class="login_wrapper">
+			<div class="animate form login_form">
+				<section class="login_content">
+					<form th:action="@{/login}" method="POST">
+						<h1>Login Form</h1>
+						<div>
+							<input type="text" id="email" name="email" th:placeholder="Email" class="form-control" />
+						</div>
+						<div>
+							<input type="password" th:placeholder="Password" id="password" name="password" class="form-control" />
+						</div>
+						<div>
+							<button name="Submit" value="Login" type="Submit" th:text="Login" class="form-control"></button>
+						</div>
+					</form>
+				</section>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

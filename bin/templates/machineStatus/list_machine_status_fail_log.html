@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/default">
+
+<body class="nav-md" layout:fragment="content">
+	<div class="container body">
+		<div class="main_container">
+			<div th:replace="fragments/sidemenu :: sidemenuFragment"></div>
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>마이닝 PC 에러로그</h3>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="row">
+						<div class="clearfix"></div>
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="x_panel">
+								<div class="x_content">
+									<div class="table-responsive">
+										<table class="table table-striped jambo_table bulk_action">
+											<thead>
+												<tr class="headings">
+													<th class="column-title text-center">ID</th>
+													<th class="column-title text-center">상태</th>
+													<th class="column-title text-center">시각</th>
+												</tr>
+											</thead>
+
+											<tbody>
+												<tr th:each="machineStatusFailLog, iterStat : ${machineStatusFailLogList}" th:class="${iterStat.odd}? 'odd pointer' : 'even pointer'">
+													<td class=" text-center"><span th:text="${machineStatusFailLog.id}"></span></td>
+													<td class=" text-center"><span th:text="${machineStatusFailLog.machineStatus}"></span></td>
+													<td class=" text-center"><span th:text="${machineStatusFailLog.updateDatetime}"></span></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+		</div>
+	</div>
+	<div th:replace="fragments/footer :: footerFragment"></div>
+	<th:block layout:fragment="script">
+	<script type="text/javascript">
+		function machine_delete(id) {
+			if(confirm('장비를 삭제하시겠습니까?')) {
+				document.location = '/machineStatus/' + id + '/delete';
+			}
+		}
+
+		$(document).ready(function() {
+			setTimeout(function(){
+				location.reload();
+			}, 300000);
+		});
+	</script>
+	</th:block>
+</body>
+</html>

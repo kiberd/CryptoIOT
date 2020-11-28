@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/default">
+
+<body class="nav-md" layout:fragment="content">
+	<div class="container body">
+		<div class="main_container">
+			<div th:replace="fragments/sidemenu :: sidemenuFragment"></div>
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>사용자 목록</h3>
+						</div>
+					</div>
+
+					<div class="clearfix"></div>
+
+					<div class="row">
+						<div class="clearfix"></div>
+
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="x_panel">
+								<a href="/admin/userRegistration" class="pull-right"><button class="btn btn-primary" type="button">등록</button></a>
+								<div class="x_content">
+									<div class="table-responsive">
+										<table class="table table-striped jambo_table bulk_action">
+											<thead>
+												<tr class="headings">
+													<th class="column-title text-center">id</th>
+													<th class="column-title text-center">name</th>
+													<th class="column-title text-center">email</th>
+													<th class="column-title text-center">관리</th>
+												</tr>
+											</thead>
+
+											<tbody>
+												<tr th:each="user, iterStat : ${userList}" th:class="${iterStat.odd}? 'odd pointer' : 'even pointer'">
+													<td class=" text-center"><span th:text="${user.id}"></span></td>
+													<td class=" text-center"><span th:text="${user.name}"></span></td>
+													<td class=" text-center"><span th:text="${user.email}"></span></td>
+													<td class=" text-center"><a th:href="${'javascript:user_delete(' + user.id + ')'}"><i class="fa fa-close"></i></a> &nbsp;&nbsp; <a th:href="${'/admin/' + user.id + '/modifyUser'}"><i class="fa fa-wrench"></i></a></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+		</div>
+	</div>
+	<div th:replace="fragments/footer :: footerFragment"></div>
+	<th:block layout:fragment="script">
+		<script type="text/javascript">
+			function user_delete(id) {
+				if (confirm('사용자를 삭제하시겠습니까?')) {
+					document.location = '/admin/' + id + '/deleteUser';
+				}
+			}
+		</script>
+	</th:block>
+</body>
+</html>
